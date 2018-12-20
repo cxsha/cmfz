@@ -11,6 +11,12 @@
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
 	<!--菜单处理-->
+    $(function(){
+        $('#aa').accordion('add', {
+            title: "",
+            content: ""
+        });
+    });
 </script>
 
 </head>
@@ -25,7 +31,27 @@
        
     <div data-options="region:'west',title:'导航菜单',split:true" style="width:220px;">
     	<div id="aa" class="easyui-accordion" data-options="fit:true">
-    		
+    		<div title="轮播图" data-options="iconCls:'icon-tip'" style="overflow: auto;padding: 10px;">
+                <p align="center"><img src="${pageContext.request.contextPath}/themes/icons/tip.png"/>轮播图</p>
+            </div>
+            <div title="吉祥妙音" data-options="iconCls:'icon-cut'" style="padding: 10px;">
+                <p align="center"><img src="${pageContext.request.contextPath}/themes/icons/cut.png">吉祥妙音</p>
+            </div>
+            <div title="甘露妙宝" data-options="iconCls:'icon-cut'" style="padding: 10px;">
+                <p align="center"><img src="${pageContext.request.contextPath}/themes/icons/cut.png">甘露妙宝</p>
+            </div>
+            <div title="功课记录" data-options="iconCls:'icon-cut'" style="padding: 10px;">
+                <p align="center"><img src="${pageContext.request.contextPath}/themes/icons/cut.png">功课记录</p>
+            </div>
+            <div title="用户模块" data-options="iconCls:'icon-cut'" style="padding: 10px;">
+                <p align="center"><img src="${pageContext.request.contextPath}/themes/icons/cut.png">用户模块</p>
+            </div>
+            <div title="上师模块" data-options="iconCls:'icon-cut'" style="padding: 10px;">
+                <p align="center"><img src="${pageContext.request.contextPath}/themes/icons/cut.png">上师模块</p>
+            </div>
+            <div title="日志管理" data-options="iconCls:'icon-zoom'" style="padding: 10px;">
+                <p align="center"><img src="${pageContext.request.contextPath}/themes/icons/search.png">日志管理</p>
+            </div>
 		</div>  
     </div>   
     <div data-options="region:'center'">

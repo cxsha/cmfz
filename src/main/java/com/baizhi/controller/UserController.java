@@ -14,6 +14,6 @@ public class UserController {
     @RequestMapping("login")
     public String login(User user){
         userService.selectByPhone(user);
-        return "forward:/login.jsp";
+        return "forward:/main/nain.jsp";
     }
 }
