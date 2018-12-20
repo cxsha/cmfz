@@ -8,15 +8,19 @@ import tk.mybatis.mapper.annotation.KeySql;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "admin")
-public class Admin implements Serializable {
+@Table(name = "menu")
+public class Menu implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
-    private String name;
-    private String password;
+    private String title;
+    private String iconCls;
+    private String url;
+    private Integer parentId;
+    private List<Menu> menus;
 }
