@@ -12,26 +12,69 @@
 	<link rel="stylesheet" href="css/login.css" type="text/css"></link>
 	<script type="text/javascript" src="script/jquery.js"></script>
 	<script type="text/javascript" src="script/common.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript">
 	
 		$(function(){
-			//点击更换验证码：
+            //初始化表单控件---username
+            $("#loginFormUsername").textbox({
+                required:true
+            });
+            //初始化表单控件---password
+            $("#loginFormPassword").validatebox({
+                required:true,
+                validType:"Length[6]"
+            });
+            //自定义规则
+            $.extend($.fn.validatebox.defaults.rules, {
+                Length: {
+                    validator: function(value,params){
+                        return value.length == params[0];
+                    },
+                    message: '请输入{0}位密码'
+                }
+            });
+			//点击更换验证码
 			$("#captchaImage").click(function(){//点击更换验证码
-				alert("自己做");
+                $("#captchaImage").prop("src","${pageContext.request.contextPath}/image/code?time="+new Date());
 			});
-			
-			//  form 表单提交
-			$("#loginForm").bind("submit",function(){
-				alert("自己做");
-				return false;
+            //初始化表单控件---登录按钮
+            $("#login").linkbutton({
+                onClick:function(){
+                    //  form 表单提交
+                    $('#loginForm').form('submit', {
+                        dataType: "json",
+                        url:"${pageContext.request.contextPath }/user/login",
+                        onSubmit: function(){
+                            var isValid = $(this).form('validate');
+                            if (!isValid){
+                                $.messager.progress('close');	// 如果表单是无效的则隐藏进度条
+                            }
+                            return isValid;	// 返回false终止表单提交
+                        },
+                        success: function(value){
+                            if(value=="ok"){
+                                location.href="${pageContext.request.contextPath }/main/main.jsp";
+                                $.messager.progress('close');	// 如果提交成功则隐藏进度条
+                            }else{
+                                $.messager.show({
+                                    title:"系统提示",
+                                    msg:value
+                                });
+                            }
+                        }
+                    });
+				}
 			});
+
 		});
 	</script>
 </head>
 <body>
 	
 		<div class="login">
-			<form id="loginForm" action="../back/index.html" method="post" >
+			<form id="loginForm" method="post" >
 				
 				<table>
 					<tbody>
@@ -43,7 +86,7 @@
 								用户名:
 							</th>
 							<td>
-								<input type="text"  name="user.name" class="text" value="" maxlength="20"/>
+								<input id="loginFormUsername" type="text"  name="name" class="text" value="" maxlength="20"/>
 							</td>
 					  </tr>
 					  <tr>
@@ -51,7 +94,7 @@
 								密&nbsp;&nbsp;&nbsp;码:
 							</th>
 							<td>
-								<input type="password" name="user.password" class="text" value="" maxlength="20" autocomplete="off"/>
+								<input id="loginFormPassword" type="password" name="password" maxlength="20" autocomplete="off"/>
 							</td>
 					  </tr>
 					
@@ -60,7 +103,7 @@
 							<th>验证码:</th>
 							<td>
 								<input type="text" id="enCode" name="enCode" class="text captcha" maxlength="4" autocomplete="off"/>
-								<img id="captchaImage" class="captchaImage" src="img/captcha.jpg" title="点击更换验证码"/>
+								<img id="captchaImage" class="captchaImage" src="${pageContext.request.contextPath}/image/code" title="点击更换验证码"/>
 							</td>
 						</tr>					
 					<tr>
@@ -75,7 +118,7 @@
 						<td>&nbsp;</td>
 						<th>&nbsp;</th>
 						<td>
-							<input type="button" class="homeButton" value="" onclick="location.href='/'"><input type="submit" class="loginButton" value="登录">
+							<input type="button" class="homeButton" value="" onclick="location.href='/'"><input id="login" class="loginButton" value="登录">
 						</td>
 					</tr>
 				</tbody></table>

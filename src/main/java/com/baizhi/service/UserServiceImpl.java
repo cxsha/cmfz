@@ -12,13 +12,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
     @Override
-    public void selectByPhone(User user) {
-        User one = userMapper.selectOne(user);
+    public User selectUserOne(User user) {
+        User user1 = new User();
+        user1.setName(user.getName());
+        User one = userMapper.selectOne(user1);
         if (one==null){
             throw new RuntimeException("此账号不存在！");
         }else{
-            if(!one.getPassword().equals(one.getSalt()+user.getPassword())){
-               throw new RuntimeException("用户密码错误！");
+            if(!one.getPassword().equals(user.getPassword())){
+               throw new RuntimeException("密码输入错误！");
+            }else {
+                return one;
             }
 
         }
