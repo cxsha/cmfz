@@ -45,7 +45,7 @@
                     //  form 表单提交
                     $('#loginForm').form('submit', {
                         dataType: "json",
-                        url:"${pageContext.request.contextPath }/user/login",
+                        url:"${pageContext.request.contextPath }/admin/login",
                         onSubmit: function(){
                             var isValid = $(this).form('validate');
                             if (!isValid){

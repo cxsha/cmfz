@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "user")
-public class User implements Serializable {
+public class Admin implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;

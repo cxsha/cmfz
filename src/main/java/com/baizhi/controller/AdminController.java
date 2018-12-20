@@ -1,7 +1,7 @@
 package com.baizhi.controller;
 
-import com.baizhi.entity.User;
-import com.baizhi.service.UserService;
+import com.baizhi.entity.Admin;
+import com.baizhi.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/admin")
+public class AdminController {
     @Autowired
-    UserService userService;
+    AdminService adminService;
     @RequestMapping("login")
-    public String login(HttpSession session,User user, String enCode){
+    public String login(HttpSession session, Admin admin, String enCode){
         try {
             String code = (String) session.getAttribute("code");
             if (!code.equalsIgnoreCase(enCode)){
                 throw new RuntimeException("验证码错误！");
             }
-            User user1 = userService.selectUserOne(user);
-            session.setAttribute("user1",user1);
+            Admin admin1 = adminService.selectAdminOne(admin);
+            session.setAttribute("admin1", admin1);
             return "ok";
         }catch (Exception e){
             String str = new String(e.getMessage());
