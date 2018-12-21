@@ -54,9 +54,11 @@
                             return isValid;	// 返回false终止表单提交
                         },
                         success: function(value){
-                            if(value=="ok"){
+                            value = eval("("+value+")");
+                            if(value == "ok"){
                                 location.href="${pageContext.request.contextPath }/main/main.jsp";
                                 $.messager.progress('close');	// 如果提交成功则隐藏进度条
+								return true;
                             }else{
                                 $.messager.show({
                                     title:"系统提示",

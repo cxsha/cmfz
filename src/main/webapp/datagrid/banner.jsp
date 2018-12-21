@@ -5,7 +5,7 @@
             iconCls: 'icon-add',
             text: "添加",
             handler: function () {
-                alert('编辑按钮')
+                $("#addBannerDialog").dialog("open");
             }
         }, '-', {
             text: "修改",
@@ -27,19 +27,51 @@
             text: "删除",
             iconCls: 'icon-remove',
             handler: function () {
-                alert('帮助按钮')
+                //获取选中行
+                var row = $("#dg").edatagrid("getSelected");
+                console.log(row);
+                $.messager.confirm("确认对话框","您确定删除吗？",function(r){
+                    if(r){
+                        $.get(
+                            "${pageContext.request.contextPath }/banner/deleteBanner",
+                            row,
+                            function(){
+                                //右下角提示框
+                                $.messager.show({
+                                    title:"系统提示",
+                                    msg:"删除成功！"
+                                });
+                            }
+                        );
+                        //刷新dg中的数据----调load方法
+                        $("#dg").datagrid("reload");
+                    }
+                });
             }
         }, '-', {
             text: "保存",
             iconCls: 'icon-save',
             handler: function () {
-                $("#dg").edatagrid("saveRow")
+                $("#dg").edatagrid("saveRow");
+                $.messager.show({
+                    title:"系统提示",
+                    msg:"修改成功！"
+                });
 
             }
         }]
+        //初始化添加对话框
+        $("#addBannerDialog").dialog({
+            title:"添加",
+            width:400,
+            height:200,
+            closed:true,
+            href:"${pageContext.request.contextPath }/datagrid/addBanner.jsp",
+            modal:true,
+            cache:false
+        });
 
         $('#dg').edatagrid({
-            method: "GET",
             updateUrl: "${pageContext.request.contextPath}/banner/updateBanner",
             url: '${pageContext.request.contextPath}/banner/queryByPage',
             columns: [[
@@ -76,3 +108,5 @@
 </script>
 
 <table id="dg"></table>
+<!-- 添加对话框 -->
+<div id="addBannerDialog"></div>

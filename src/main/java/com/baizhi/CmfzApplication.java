@@ -10,11 +10,7 @@ import org.springframework.boot.autoconfigure.web.WebMvcRegistrationsAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import tk.mybatis.spring.annotation.MapperScan;
-
-import java.nio.charset.Charset;
-import java.util.List;
 
 @MapperScan("com.baizhi.mapper")
 @SpringBootApplication

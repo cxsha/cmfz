@@ -25,7 +25,7 @@
                             //console.log(first.title);
                             var a = "";
                             $.each(first.menus, function (index1, second) {
-                                a += "<p style='text-align: center'><a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" onclick=\"addTabs('" + second.title + "','" + second.iconCls + "','" + second.url + "')\" data-options=\"iconCls:'"+ second.iconCls +"'\">" + second.title + "</a></p>";
+                                a += "<p style='text-align: center'><a id=\"btn\" href=\"javascript:void(0)\" class=\"easyui-linkbutton\" onclick=\"addTabs('" + second.title + "','" + second.iconCls + "','" + second.url + "')\" data-options=\"iconCls:'"+ second.iconCls +"'\">" + second.title + "</a></p>";
                             })
                             $('#aa').accordion('add', {
                                 title: first.title,

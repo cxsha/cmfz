@@ -25,8 +25,8 @@ public class Banner implements Serializable {
 
     private String imgPath;
     private String status;
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
 
     private Date pubDate;
     private String description;

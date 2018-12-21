@@ -5,7 +5,7 @@
         select count(*) from banner
     </select>
     <select id="selectByPage" resultType="Banner">
-        select id,title,img_path imgPath,status,pub_date pubDate,description from banner order by id limit ${(curPage-1)*pageSize},${pageSize}
+        select id,title,img_path imgPath,status,pub_date pubDate,description from banner order by id desc limit ${(curPage-1)*pageSize},${pageSize}
     </select>
 </mapper>
 
