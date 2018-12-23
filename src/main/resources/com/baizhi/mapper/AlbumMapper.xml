@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.mapper.AlbumMapper">
+    <select id="selectTotalCount" resultType="Integer">
+        select count(*) from album
+    </select>
+    <resultMap id="rm1" type="Album">
+        <id column="id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="count" property="count"></result>
+        <result column="coverImg" property="coverImg"></result>
+        <result column="score" property="score"></result>
+        <result column="author" property="author"></result>
+        <result column="broadcast" property="broadcast"></result>
+        <result column="brief" property="brief"></result>
+        <result column="pubDate" property="pubDate"></result>
+        <collection property="children" ofType="Chapter">
+            <id column="chaId" property="id"></id>
+            <result column="chaTitle" property="title"></result>
+            <result column="size" property="size"></result>
+            <result column="duration" property="duration"></result>
+            <result column="uploadDate" property="uploadDate"></result>
+            <result column="url" property="url"></result>
+            <result column="albumId" property="albumId"></result>
+        </collection>
+    </resultMap>
+    <select id="selectByPage" resultMap="rm1">
+        select alb.*,cha.id chaId,cha.title chaTitle,cha.size size,cha.duration duration,cha.upload_date uploadDate,cha.url url,cha.album_id albumId from
+        (select id,title,count,cover_img coverImg,score,author,broadcast,brief,pub_date pubDate
+        from album order by id desc
+        limit ${(curPage-1)*pageSize},${pageSize}) alb left join chapter cha
+        on alb.id=cha.album_id
+    </select>
+</mapper>
+
+
+
+
+
