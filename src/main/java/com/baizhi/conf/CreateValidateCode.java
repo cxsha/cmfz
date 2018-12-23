@@ -11,9 +11,6 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 public class CreateValidateCode {
-
-
-
 	// 图片的宽度。
 	private int width = 160;
 	// 图片的高度。
