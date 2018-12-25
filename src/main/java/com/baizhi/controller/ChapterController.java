@@ -78,6 +78,10 @@ public class ChapterController {
         try {
             ServletOutputStream outputStream = response.getOutputStream();
             outputStream.write(FileUtils.readFileToByteArray(file));
+            if (outputStream == null) {
+                outputStream.flush();
+                outputStream.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

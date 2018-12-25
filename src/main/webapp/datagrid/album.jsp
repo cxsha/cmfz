@@ -64,9 +64,10 @@
             text: "导出表格",
             iconCls: 'icon-undo',
             handler: function () {
-                $.ajax({
+                location.href="${pageContext.request.contextPath}/poi/testExport";
+          /*      $.ajax({
                     type:"get",
-                    url:"${pageContext.request.contextPath}/poi/testExport",
+
                     dataType:"JSON",
                     success:function (result) {
                         if (result=="success"){
@@ -81,7 +82,7 @@
                             });
                         }
                     }
-                });
+                });*/
             }
         }]
 
