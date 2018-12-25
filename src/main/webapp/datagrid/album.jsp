@@ -60,6 +60,29 @@
                     alert("请先选中音频")
                 }
             }
+        }, '-', {
+            text: "导出表格",
+            iconCls: 'icon-undo',
+            handler: function () {
+                $.ajax({
+                    type:"get",
+                    url:"${pageContext.request.contextPath}/poi/testExport",
+                    dataType:"JSON",
+                    success:function (result) {
+                        if (result=="success"){
+                            $.messager.show({
+                                title:"系统提示",
+                                msg:"导出成功！"
+                            });
+                        }else {
+                            $.messager.show({
+                                title:"系统提示",
+                                msg:"导出失败！"
+                            });
+                        }
+                    }
+                });
+            }
         }]
 
         //初始化专辑详情对话框
