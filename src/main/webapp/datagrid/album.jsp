@@ -1,6 +1,6 @@
 <%@page pageEncoding="UTF-8" %>
 <script type="text/javascript">
-    var aId = null;
+    var oneAlbum = null;
     var cId = null;
     var cUrl = null;
     $(function () {
@@ -15,10 +15,10 @@
                         alert("请选中专辑")
                     }else {
                         $("#albumDialog").dialog("open");
-                        aId = row.id;
+                        oneAlbum = row;
                     }
                 } else {
-                    alert("请先选中行")
+                    alert("请先选中专辑")
                 }
             }
         }, '-', {
@@ -48,8 +48,17 @@
             text: "下载音频",
             iconCls: 'icon-undo',
             handler: function () {
-                $("#album").edatagrid("saveRow")
-
+                //获取选中行
+                var row = $("#album").edatagrid("getSelected");
+                if (row != null) {
+                    if (row.albumId != null) {
+                        location.href = "${pageContext.request.contextPath}/chapter/down?url="+row.url+"&title="+row.title;
+                    }else {
+                        alert("请选中音频")
+                    }
+                } else {
+                    alert("请先选中音频")
+                }
             }
         }]
 

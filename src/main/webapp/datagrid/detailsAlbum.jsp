@@ -2,12 +2,8 @@
 <script type="text/javascript">
     $(function () {
         //页面加载成功后，调load查一个，并且自动填充表单数据
-        $("#detailsAlbumForm").form("load","${pageContext.request.contextPath }/album/selectOneAlbum?id="+aId);
-        $("#detailsAlbumForm").form({
-            onLoadSuccess:function (data) {
-                $("#detailsAlbumFormCoverImg").prop("src","${pageContext.request.contextPath}"+data.coverImg);
-            }
-        })
+        $("#detailsAlbumForm").form("load",oneAlbum);
+        $("#detailsAlbumFormCoverImg").prop("src","${pageContext.request.contextPath}/image/"+oneAlbum.coverImg);
         //初始化退出按钮
         $("#detailsAlbumFormExitBtn").linkbutton({
             onClick:function () {

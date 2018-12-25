@@ -5,28 +5,14 @@
         $("#addChapterFormTitle").textbox({
             required:true
         });
-        //初始化表单控件---size
-        $("#addChapterFormSize").textbox({
-            required:true
-        });
-        //初始化表单控件---duration
-        $("#addChapterFormDuration").textbox({
-            required:true
-        });
         //初始化表单控件---uploadDate
         $("#addChapterFormUploadDate").datebox({
             required:true
         });
-        //初始化表单控件---url
-        $("#addChapterFormUrl").textbox({
+        //初始化表单控件---audio(url)
+        $("#addChapterFormUrl").filebox({
             required:true
         });
-        //初始化表单控件---albumId
-        $("#addChapterFormAlbumId").textbox({
-            required:true,
-            value:cId
-        });
-
         //初始化表单控件---添加按钮
         $("#addChapterFormSaveBtn").linkbutton({
             onClick:function(){
@@ -34,7 +20,7 @@
                 $("#addChapterDialog").dialog("close");
                 //提交表单----调用form表单的submit方法
                 $("#addChapterForm").form("submit",{
-                    url:"${pageContext.request.contextPath }/chapter/addChapter",
+                    url:"${pageContext.request.contextPath }/chapter/addChapter?albumId="+cId,
                     onSubmit:function(){
                         //表单验证----调用form的validate方法
                         return $("#addChapterForm").form("validate");
@@ -58,12 +44,9 @@
         });
     })
 </script>
-<form id="addChapterForm" method="post">
+<form id="addChapterForm" method="post" enctype="multipart/form-data">
     名字<input id="addChapterFormTitle" name="title"/><br/>
-    章节大小<input id="addChapterFormSize" name="size"/><br/>
-    章节时长<input id="addChapterFormDuration" name="duration"/><br/>
     上传日期<input id="addChapterFormUploadDate" name="uploadDate"/><br/>
-    下载路径<input id="addChapterFormUrl" name="url"/><br/>
-    所属专辑<input id="addChapterFormAlbumId" name="albumId" readonly/><br/>
+    下载路径<input id="addChapterFormUrl" name="audio"/><br/>
     <a id="addChapterFormSaveBtn">添加</a> <a id="addChapterFormResetBtn">重置</a>
 </form>

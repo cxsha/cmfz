@@ -5,8 +5,8 @@
         $("#addAlbumFormTitle").textbox({
             required:true
         });
-        //初始化表单控件---coverImg
-        $("#addAlbumFormCoverImg").textbox({
+        //初始化表单控件---file(coverImg)
+        $("#addAlbumFormCoverImg").filebox({
             required:true
         });
         //初始化表单控件---score
@@ -60,9 +60,9 @@
         });
     })
 </script>
-<form id="addAlbumForm" method="post">
+<form id="addAlbumForm" method="post" enctype="multipart/form-data">
     名字<input id="addAlbumFormTitle" name="title"/><br/>
-    封面<input id="addAlbumFormCoverImg" name="coverImg"/><br/>
+    封面<input id="addAlbumFormCoverImg" name="image"/><br/>
     评分<input id="addAlbumFormScore" name="score"/><br/>
     作者<input id="addAlbumFormAuthor" name="author"/><br/>
     播音<input id="addAlbumFormBroadcast" name="broadcast"/><br/>

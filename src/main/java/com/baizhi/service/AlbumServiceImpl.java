@@ -27,14 +27,6 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public Album selectOneAlbum(Integer id) {
-        Album album = new Album();
-        album.setId(id);
-        Album album1 = albumMapper.selectOne(album);
-        return album1;
-    }
-
-    @Override
     public void addAlbum(Album album) {
         albumMapper.insert(album);
         Chapter chapter = new Chapter();
